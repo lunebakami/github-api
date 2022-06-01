@@ -39,6 +39,20 @@ app.get('/api/users/:username/details', async (req, res) => {
   }
 });
 
+app.get('/api/users/:username/repos', async (req, res) => {
+  try {
+    const { username } = req.params;
+
+    const { data } = await api.get(`/users/${username}/repos`);
+
+    res.json({
+      data,
+    });
+  } catch (error) {
+    res.json({ data: error });
+  }
+});
+
 app.listen(3000, () => {
   console.log('API listening on port 3000');
 });
