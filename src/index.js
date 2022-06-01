@@ -16,11 +16,19 @@ app.get('/api/', (req, res) => {
 app.get('/api/users', async (req, res) => {
   try {
     const { since = 0 } = req.query;
+    const perPage = 10;
+    const nextPage = `/api/users?since=${Number(since) + perPage}`;
+    let previousPage = '/api/users';
 
-    const { data } = await api.get(`/users?since=${since}`);
+    const { data } = await api.get(`/users?since=${since}&per_page=${perPage}`);
+
+    if (since >= perPage) {
+      previousPage = `/api/users?since=${Number(since) - perPage}`;
+    }
 
     res.json({
-      nextPage: `/api/users?since=${Number(since) + 30}`,
+      nextPage,
+      previousPage,
       data,
     });
   } catch (error) {
