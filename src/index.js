@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const api = require('./services/api');
 
+const port = process.env.PORT || 3000;
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -54,6 +56,6 @@ app.get('/api/users/:username/repos', async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('API listening on port 3000');
+app.listen(port, () => {
+  console.log(`API listening on port ${port}`);
 });
