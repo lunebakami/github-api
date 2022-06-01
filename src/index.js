@@ -25,7 +25,7 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
-app.get('/api/users/:username', async (req, res) => {
+app.get('/api/users/:username/details', async (req, res) => {
   try {
     const { username } = req.params;
 
